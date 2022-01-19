@@ -7,6 +7,8 @@ import com.example.fourthhomeworkibrahimtkk.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -31,13 +33,20 @@ public class UserService {
     }
 
     public UserDto findByUsername(String username) {
-        final User user = userRepository.findByUsername(username);
+        final Optional<User> optionalUser = userRepository.findByUsername(username);
+        UserDto userDto = new UserDto();
 
-        return UserDto.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .name(user.getName())
-                .build();
+        if (optionalUser.isPresent()) {
+            final User user = optionalUser.get();
+            return UserDto.builder()
+                    .id(user.getId())
+                    .username(user.getUsername())
+                    .name(user.getName())
+                    .build();
+        }
+        return userDto;
+
+
     }
 
     public void delete(Long id) {

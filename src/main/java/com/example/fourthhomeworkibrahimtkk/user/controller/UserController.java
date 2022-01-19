@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final ValidationService<UserSaveRequest> saveUserValidationService;
+//    private final ValidationService<UserSaveRequest> saveUserValidationService;
 
 
     @PostMapping
     public ResponseEntity create(@RequestBody UserSaveRequest userSaveRequest){
 
-        final ValidationResult validationResult = saveUserValidationService.validate(userSaveRequest);
-        if (!validationResult.getIsValid()) {
-            // TODO: error dondur
-            ResponseEntity.ok();
-        }
+//        final ValidationResult validationResult = saveUserValidationService.validate(userSaveRequest);
+//        if (!validationResult.getIsValid()) {
+//            // TODO: error dondur
+//            ResponseEntity.ok();
+//        }
 
         final UserDto usrUserDto = userService.save(userSaveRequest);
 
